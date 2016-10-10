@@ -17,8 +17,6 @@ char* strncpy2(char *dest, char *src, int n);
 char* strcat2(char *dest, char *src);
 char* strncat2(char *dest, char *src, int n);
 int strcmp2(char *s1, char *s2);
-char* strchr2(char *s, char c);
-char* strstr2(char *s1, char *s2);
 
 
 int strlen2(char *s)
@@ -73,6 +71,33 @@ int strcmp2(char *s1, char *s2){
 }
 
 
+char* strchr2(char *s, char c){
+	int i = 0;
+	int len = strlen2(s);
+	char *ans = &s[0];
+	for(;i<len;i++){
+		if (s[i]==c) return ans;
+			ans++;
+		}
+	return 0;
+}
+
+
+char* strstr2(char *s1, char *s2){
+	while(*s1){
+		char *temp = s1;
+		char *tempSub = s2;
+		while(*s1 && *tempSub && *s1 == *tempSub){
+			s1++;
+			tempSub++;
+		}
+		if(!*tempSub) return temp;
+		s1 = temp + 1;
+	}
+	return 0;
+}
+
+
 
 
 int main() {
@@ -98,8 +123,9 @@ int main() {
 	//printf("\nstrncmp: compare(n=2) \"0113\" to \"01224\": %d", strncmp2("0113", "01224", 2));
 	//printf("\nstrncmp: compare(n=3) \"0123\" to \"01234\": %d\n", strncmp2("0123", "01234", 3));
 
-	//printf("\nstrchr: Looking for \'1\' in \"1234\": %", strchr2("1234", '1'));
 
+	printf("\nstrchr: Looking for \'2\' in \"1234\": %s\n", strchr2("1234", '2'));
+	printf("\nstrstr: Looking for \'23\' in \"1234\": %s\n", strstr2("1234", "23"));
 		
 	return 0;
 }
